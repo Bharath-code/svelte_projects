@@ -1,10 +1,12 @@
 <script>
-	let { name } = $props();
+	let { name, children, secondChild } = $props();
 </script>
 
 <div>
 	<h1>Hello from {name}!!</h1>
 	<h2>{name.replaceAll('a', 'A')}</h2>
+	{@render children()}
+	{@render secondChild('Nivas')}
 </div>
 
 <style>

@@ -1,4 +1,6 @@
 <script>
+	// @ts-nocheck
+
 	let formState = $state({
 		name: '',
 		bday: '',
@@ -11,48 +13,20 @@
 
 <p>steps: {formState.step + 1}</p>
 <main>
-	{#if formState.step === 0}
-		<div>
-			<label for="name">Name</label>
-			<input type="text" id="name" bind:value={formState.name} />
-			<button
-				onclick={() => {
-					if (formState.name !== '') {
-						formState.step += 1;
-						formState.error = '';
-					} else {
-						formState.error = 'Your name is empty. Please fillout the name';
-					}
-				}}>Next</button
-			>
-		</div>
-	{:else if formState.step === 1}
-		<div>
-			<label for="bday">Birthday</label>
-			<input type="date" id="bday" bind:value={formState.bday} />
-			<button
-				onclick={() => {
-					formState.step -= 1;
-				}}>Prev</button
-			>
-			<button
-				onclick={() => {
-					if (formState.bday !== '') {
-						formState.step += 1;
-						formState.error = '';
-					} else {
-						formState.error = 'Your birthday is empty. Please fillout the name';
-					}
-				}}>Next</button
-			>
-		</div>
-	{:else}
-		<p>Thank you!!!</p>
-	{/if}
+	{@render formStep({ question: 'what is your name', id: 'name', type: 'text' })}
 	{#if formState.error}
 		<p class="error">{formState.error}</p>
 	{/if}
 </main>
+
+{#snippet formStep({ id, question, type })}
+	<article>
+		<div>
+			<label for={id}>{question}</label>
+			<input {type} {id} bind:value={formState[id]} />
+		</div>
+	</article>
+{/snippet}
 
 <style>
 	.error {

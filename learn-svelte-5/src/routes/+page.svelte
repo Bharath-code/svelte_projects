@@ -11,7 +11,12 @@
 	}
 </script>
 
-<Header {name} />
+<Header {name}>
+	<h3>testing children props</h3>
+	{#snippet secondChild(name)}
+		<p>second children props - testing inline snippet {name}</p>
+	{/snippet}
+</Header>
 <h2>{fullName}</h2>
 <input type="text" bind:value={name} />
 
