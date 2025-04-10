@@ -1,6 +1,7 @@
 <script>
 	import Header from './Header.svelte';
 	import FormState from './FormState.svelte';
+	import NewState from './store.svelte';
 
 	let name = $state('Bharath');
 	let status = $state('OPEN');
@@ -9,6 +10,8 @@
 	function toggle() {
 		status = status === 'OPEN' ? 'CLOSED' : 'OPEN';
 	}
+
+	const newState = new NewState();
 </script>
 
 <Header {name}>
@@ -22,6 +25,6 @@
 
 <p>The store is now {status}</p>
 <button onclick={toggle}>Toggle status</button>
-
+<button onclick={() => newState.up()}>{newState.value}</button>
 <hr />
 <FormState />
