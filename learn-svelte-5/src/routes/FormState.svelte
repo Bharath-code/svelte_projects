@@ -1,4 +1,6 @@
 <script>
+	import { fly } from 'svelte/transition';
+
 	// @ts-nocheck
 
 	let formState = $state({
@@ -7,6 +9,7 @@
 		error: ''
 	});
 
+	$inspect(formState.step);
 	const QUESTIONS = [
 		{
 			question: 'what is your name?',
@@ -41,7 +44,12 @@
 <main>
 	{#each QUESTIONS as question, index (question.id)}
 		{#if formState.step === index}
-			{@render formStep(question)}
+			<div
+				in:fly={{ x: 200, duration: 200, delay: 200, opacity: 0 }}
+				out:fly={{ x: -200, duration: 200, opacity: 0 }}
+			>
+				{@render formStep(question)}
+			</div>
 		{/if}
 	{/each}
 	{#if formState.error}
