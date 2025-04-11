@@ -9,7 +9,7 @@
 
 		set c(c) {
 			this.#c = c;
-			this.#f = c * (9 / 5) + 32;
+			this.#f = Number(c) * (9 / 5) + 32;
 		}
 
 		get f() {
@@ -18,7 +18,7 @@
 
 		set f(f) {
 			this.#f = f;
-			this.#c = (f - 32) * (5 / 9);
+			this.#c = (Number(f) - 32) * (5 / 9);
 		}
 	}
 
